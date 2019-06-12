@@ -5,14 +5,14 @@
 			"width" : 940,
 			"filter" : "BICUBIC",
 			"extention" : "png",
-			"path" : "C:\\2blokes\\Cosmic Export\\tapas"
+			"path" : "C:\\example\\folder\\tapas"
 		},
 		{
 			"name" : "webtoons",
 			"width" : 800,
 			"filter" : "BICUBIC",
 			"extention" : "jpg",
-			"path" : "C:\\2blokes\\Cosmic Export\\webtoons"
+			"path" : "C:\\example\\folder\\webtoons"
 		}
 	]
 }
