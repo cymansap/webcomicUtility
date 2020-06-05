@@ -4,14 +4,14 @@
 			"name" : "tapas",
 			"width" : 940,
 			"filter" : "BICUBIC",
-			"extention" : "png",
+			"extension" : "png",
 			"path" : "C:\\example\\folder\\tapas"
 		},
 		{
 			"name" : "webtoons",
 			"width" : 800,
 			"filter" : "BICUBIC",
-			"extention" : "jpg",
+			"extension" : "jpg",
 			"path" : "C:\\example\\folder\\webtoons"
 		}
 	]
