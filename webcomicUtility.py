@@ -37,11 +37,26 @@ for file_name in sys.argv[1:]:
 			( int(input_image.width * scale), int(input_image.height * scale) ),
 			resample=ALGS[form["filter"]]
 		)
+		print("img.height: %s" % img.height)
 
-		print("saving ... ", end="")
-		img = img.convert("RGB")
-		save_name = "%s.%s" % (name, form["extension"])
-		img.save(os.path.join(form["path"], save_name), quality=100)
+		if form["height"] < img.height:
+			crop_index = 1
+			for crop_y in range(0, img.height, form["height"]):
+				print("cropping ... ", end="")
+				if crop_y + form["height"] < img.height:
+					crop_height = form["height"]
+				else:
+					crop_height = img.height - crop_y
+				cropped_image = img.crop((0, crop_y, img.width, crop_y + crop_height))
+
+				print("saving ... ", end="")
+				save_name = "%s(%d).%s" % (name, crop_index, form["extension"])
+				cropped_image.convert("RGB").save(os.path.join(form["path"], save_name), quality=100)
+				crop_index += 1
+		else:
+			print("saving ... ", end="")
+			save_name = "%s.%s" % (name, form["extension"])
+			img.convert("RGB").save(os.path.join(form["path"], save_name), quality=100)
 
 		print("finished with format %s" % form["name"])
 		
