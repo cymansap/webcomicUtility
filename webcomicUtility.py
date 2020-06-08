@@ -31,32 +31,28 @@ for file_name in sys.argv[1:]:
 		continue
 
 	for form in settings["formats"]:
-		print("resizing ... ", end="")
+		print("\tresizing for %s" % form["name"])
 		scale = form["width"] / float(input_image.width)
 		img = input_image.resize(
 			( int(input_image.width * scale), int(input_image.height * scale) ),
 			resample=ALGS[form["filter"]]
 		)
-		print("img.height: %s" % img.height)
 
 		if form["height"] < img.height:
 			crop_index = 1
 			for crop_y in range(0, img.height, form["height"]):
-				print("cropping ... ", end="")
 				if crop_y + form["height"] < img.height:
 					crop_height = form["height"]
 				else:
 					crop_height = img.height - crop_y
 				cropped_image = img.crop((0, crop_y, img.width, crop_y + crop_height))
 
-				print("saving ... ", end="")
 				save_name = "%s(%d).%s" % (name, crop_index, form["extension"])
+				print("\t\tcropping and saving to %s" % save_name)
 				cropped_image.convert("RGB").save(os.path.join(form["path"], save_name), quality=100)
 				crop_index += 1
 		else:
-			print("saving ... ", end="")
 			save_name = "%s.%s" % (name, form["extension"])
+			print("\t\tsaving to %s" % save_name)
 			img.convert("RGB").save(os.path.join(form["path"], save_name), quality=100)
-
-		print("finished with format %s" % form["name"])
 		
